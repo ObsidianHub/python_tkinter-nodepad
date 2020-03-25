@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
+from tkinter import filedialog
 
 root = Tk()
 root.geometry('1000x500+1000+300')
@@ -7,7 +9,7 @@ main_menu = Menu(root)
 root.config(menu=main_menu)
 
 def about_program():
-  print('ABOUT')
+  messagebox.showinfo(title='About Notepad', message='Программа Notepad by Python')
 
 def change_theme(theme):
   t['bg'] = theme_colors[theme]['text_bg']
