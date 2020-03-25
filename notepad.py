@@ -11,6 +11,11 @@ root.config(menu=main_menu)
 def about_program():
   messagebox.showinfo(title='About Notepad', message='Программа Notepad by Python')
 
+def notepad_quit():
+  answer = messagebox.askokcancel(title="Выход", message="Закрыть программу?")
+  if answer:
+    root.destroy()
+
 def change_theme(theme):
   t['bg'] = theme_colors[theme]['text_bg']
   t['fg'] = theme_colors[theme]['text_fg']
@@ -22,7 +27,7 @@ file_menu = Menu(main_menu, tearoff=0)
 file_menu.add_command(label="Открыть")
 file_menu.add_command(label="Сохранить")
 file_menu.add_separator()
-file_menu.add_command(label="Выход")
+file_menu.add_command(label="Выход", command=notepad_quit)
 main_menu.add_cascade(label="Файл", menu=file_menu)
 
 # Theme
