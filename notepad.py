@@ -41,7 +41,7 @@ f_text.pack(fill=BOTH, expand=1)
 
 theme_colors = {
   "dark": {
-    "text_bg": "#343D46", "text_fg": "#C6DEC1", "cursor": "#EDA756", "select_bg": "#4E5A65"
+    "text_bg": "#343D46", "text_fg": "#fff", "cursor": "#EDA756", "select_bg": "#4E5A65"
   },
   "light": {
     "text_bg": "#fff", "text_fg": "#000", "cursor": "#8000ff", "select_bg": "#777"
