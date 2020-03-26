@@ -25,16 +25,25 @@ def change_theme(theme):
 def open_file():
   file_path = filedialog.askopenfilename(
     title="Выбор файла",
-    filetypes=(("Текстовые документы(*.txt)", "*.txt"), ("Все файлы", "*.*"))
+    filetypes=(("Текстовые документы (*.txt)", "*.txt"), ("Все файлы", "*.*"))
     )
   if file_path:
     t.delete('1.0', END)
     t.insert('1.0', open(file_path, encoding='utf-8').read())
 
+def save_file():
+  file_path = filedialog.asksaveasfilename(
+    filetypes=(("Текстовые документы (*.txt)", "*.txt"), ("Все файлы", "*.*"))
+    )
+  f = open(file_path, 'w', encoding='utf-8')
+  text = t.get('1.0', END)
+  f.write(text)
+  f.close()
+
 # File
 file_menu = Menu(main_menu, tearoff=0)
 file_menu.add_command(label="Открыть", command=open_file)
-file_menu.add_command(label="Сохранить")
+file_menu.add_command(label="Сохранить", command=save_file)
 file_menu.add_separator()
 file_menu.add_command(label="Выход", command=notepad_quit)
 main_menu.add_cascade(label="Файл", menu=file_menu)
