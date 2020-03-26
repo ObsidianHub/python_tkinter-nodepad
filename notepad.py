@@ -22,9 +22,18 @@ def change_theme(theme):
   t['insertbackground'] = theme_colors[theme]['cursor']
   t['selectbackground'] = theme_colors[theme]['select_bg']
 
+def open_file():
+  file_path = filedialog.askopenfilename(
+    title="Выбор файла",
+    filetypes=(("Текстовые документы(*.txt)", "*.txt"), ("Все файлы", "*.*"))
+    )
+  if file_path:
+    t.delete('1.0', END)
+    t.insert('1.0', open(file_path, encoding='utf-8').read())
+
 # File
 file_menu = Menu(main_menu, tearoff=0)
-file_menu.add_command(label="Открыть")
+file_menu.add_command(label="Открыть", command=open_file)
 file_menu.add_command(label="Сохранить")
 file_menu.add_separator()
 file_menu.add_command(label="Выход", command=notepad_quit)
