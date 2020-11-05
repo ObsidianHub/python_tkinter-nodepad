@@ -8,37 +8,47 @@ root.geometry('1000x500+1000+300')
 main_menu = Menu(root)
 root.config(menu=main_menu)
 
+
 def about_program():
-  messagebox.showinfo(title='About Notepad', message='Программа Notepad by Python')
+    messagebox.showinfo(title='About Notepad',
+                        message='Программа Notepad by Python')
+
 
 def notepad_quit():
-  answer = messagebox.askokcancel(title="Выход", message="Закрыть программу?")
-  if answer:
-    root.destroy()
+    answer = messagebox.askokcancel(
+        title="Выход", message="Закрыть программу?")
+    if answer:
+        root.destroy()
+
 
 def change_theme(theme):
-  t['bg'] = theme_colors[theme]['text_bg']
-  t['fg'] = theme_colors[theme]['text_fg']
-  t['insertbackground'] = theme_colors[theme]['cursor']
-  t['selectbackground'] = theme_colors[theme]['select_bg']
+    t['bg'] = theme_colors[theme]['text_bg']
+    t['fg'] = theme_colors[theme]['text_fg']
+    t['insertbackground'] = theme_colors[theme]['cursor']
+    t['selectbackground'] = theme_colors[theme]['select_bg']
+
 
 def open_file():
-  file_path = filedialog.askopenfilename(
-    title="Выбор файла",
-    filetypes=(("Текстовые документы (*.txt)", "*.txt"), ("Все файлы", "*.*"))
+    file_path = filedialog.askopenfilename(
+        title="Выбор файла",
+        filetypes=(("Текстовые документы (*.txt)",
+                    "*.txt"), ("Все файлы", "*.*"))
     )
-  if file_path:
-    t.delete('1.0', END)
-    t.insert('1.0', open(file_path, encoding='utf-8').read())
+    if file_path:
+        t.delete('1.0', END)
+        t.insert('1.0', open(file_path, encoding='utf-8').read())
+
 
 def save_file():
-  file_path = filedialog.asksaveasfilename(
-    filetypes=(("Текстовые документы (*.txt)", "*.txt"), ("Все файлы", "*.*"))
+    file_path = filedialog.asksaveasfilename(
+        filetypes=(("Текстовые документы (*.txt)",
+                    "*.txt"), ("Все файлы", "*.*"))
     )
-  f = open(file_path, 'w', encoding='utf-8')
-  text = t.get('1.0', END)
-  f.write(text)
-  f.close()
+    f = open(file_path, 'w', encoding='utf-8')
+    text = t.get('1.0', END)
+    f.write(text)
+    f.close()
+
 
 # File
 file_menu = Menu(main_menu, tearoff=0)
@@ -52,8 +62,10 @@ main_menu.add_cascade(label="Файл", menu=file_menu)
 theme_menu = Menu(main_menu, tearoff=0)
 theme_menu_sub = Menu(theme_menu, tearoff=0)
 
-theme_menu_sub.add_command(label="Light theme", command=lambda: change_theme('light'))
-theme_menu_sub.add_command(label="Dark theme", command=lambda: change_theme('dark'))
+theme_menu_sub.add_command(
+    label="Light theme", command=lambda: change_theme('light'))
+theme_menu_sub.add_command(
+    label="Dark theme", command=lambda: change_theme('dark'))
 
 theme_menu.add_cascade(label="Оформление", menu=theme_menu_sub)
 theme_menu.add_command(label="О программе", command=about_program)
@@ -65,27 +77,27 @@ f_text = Frame(root)
 f_text.pack(fill=BOTH, expand=1)
 
 theme_colors = {
-  "dark": {
-    "text_bg": "#343D46", "text_fg": "#fff", "cursor": "#EDA756", "select_bg": "#4E5A65"
-  },
-  "light": {
-    "text_bg": "#fff", "text_fg": "#000", "cursor": "#8000ff", "select_bg": "#777"
-  }
+    "dark": {
+        "text_bg": "#343D46", "text_fg": "#fff", "cursor": "#EDA756", "select_bg": "#4E5A65"
+    },
+    "light": {
+        "text_bg": "#fff", "text_fg": "#000", "cursor": "#8000ff", "select_bg": "#777"
+    }
 }
 
 t = Text(
-  f_text,
-  bg=theme_colors['dark']['text_bg'],
-  fg=theme_colors['dark']['text_fg'],
-  padx=10,
-  pady=10,
-  wrap=WORD,
-  insertbackground=theme_colors['dark']['cursor'],
-  selectbackground=theme_colors['dark']['select_bg'],
-  width=30,
-  spacing3=10,
-  font=("Courier New", 11)
-  )
+    f_text,
+    bg=theme_colors['dark']['text_bg'],
+    fg=theme_colors['dark']['text_fg'],
+    padx=10,
+    pady=10,
+    wrap=WORD,
+    insertbackground=theme_colors['dark']['cursor'],
+    selectbackground=theme_colors['dark']['select_bg'],
+    width=30,
+    spacing3=10,
+    font=("Courier New", 11)
+)
 t.pack(fill=BOTH, expand=1, side=LEFT)
 
 # Scrollbar
